@@ -1,0 +1,9 @@
+- hosts: tag_Server_Web
+  roles:
+  - role: "myapache"
+
+- hosts: tag_Server_haproxy
+  remote_user: ubuntu
+  roles:
+  - role: "haproxy"
+
