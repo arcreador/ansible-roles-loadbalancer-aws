@@ -1,0 +1,5 @@
+---
+# tasks file for haproxy
+
+- name: "haproxy installation"
+  include_tasks: rproxy.yml

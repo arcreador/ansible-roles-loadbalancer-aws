@@ -1,0 +1,41 @@
+---
+# tasks file for myapche
+
+- name: "include the file"
+  include_vars: "{{ ansible_facts['distribution']}}.yml"
+
+- name: "installing httpd package"
+  package:
+        name: "{{ package_name }}"
+        state: present
+
+- name: "installing php"
+  package: 
+        name: "php"
+        state: present
+
+- name: "coping file"
+  copy:
+    src: "index.php"
+    dest: "/var/www/html/"
+
+- service: 
+         name: "{{ package_name }}"
+         state: started
+         enabled: yes
+
+- package:
+        name: "firewalld"
+        state: present
+- service:
+        name: "firewalld"
+        state: started
+        enabled: yes
+
+- firewalld:
+        port: "80/tcp"
+        state: enabled
+        permanent: yes
+        immediate: yes
+ 
+
